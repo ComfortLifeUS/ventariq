@@ -157,7 +157,7 @@ export default async function EventLandingPage({
               <div className="container">
           {event.locations && event.locations.length > 0 && (
             <div>
-              <div>
+              <div >
                 {event.locations.map((location) => (
                   <LocationCard
                     key={location.slug}
