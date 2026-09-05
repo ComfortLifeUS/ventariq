@@ -41,6 +41,7 @@ export default async function EditEventPage({
           tagline: event.tagline,
           description: event.description,
           heroImage: event.hero_image ?? "",
+          saleImage: event.sale_image ?? "",
           routeItems: event.route_items ?? [],
         }}
         initialPlans={(plans ?? []).map((p) => ({
@@ -51,16 +52,16 @@ export default async function EditEventPage({
           features: (p.features ?? []).join("\n"),
           price: p.price != null ? String(p.price) : "",
         }))}
-        initialLocations={(locations ?? []).map((l) => ({
-          id: l.id,
-          slug: l.slug,
-          name: l.name,
-          description: l.description,
-          image: l.image ?? "",
-          basePrice: l.base_price != null ? String(l.base_price) : "",
-          assetProductSku: l.asset_product_sku ?? "",
-          assetCitySlug: l.asset_city_slug ?? "",
-        }))}
+        // initialLocations={(locations ?? []).map((l) => ({
+        //   id: l.id,
+        //   slug: l.slug,
+        //   name: l.name,
+        //   description: l.description,
+        //   image: l.image ?? "",
+        //   basePrice: l.base_price != null ? String(l.base_price) : "",
+        //   assetProductSku: l.asset_product_sku ?? "",
+        //   assetCitySlug: l.asset_city_slug ?? "",
+        // }))}
       />
     </main>
   );
