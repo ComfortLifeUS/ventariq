@@ -3,9 +3,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Resend My Guide",
+  title: "Resend My Planner",
   description:
-    "Lost your Ventariq download link? Enter the email you used at checkout and we'll resend your guide instantly.",
+    "Lost your Ventariq download link? Enter the email you used at checkout and we’ll resend your planner link.",
   robots: { index: true, follow: true },
 };
 
