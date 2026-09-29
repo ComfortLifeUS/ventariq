@@ -1,10 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase-server";
 import { createAdminClient } from "@/lib/supabase-admin";
-import {
-  fetchAssetBuffer,
-  resolveAssetDownloadUrl,
-} from "@/lib/assestDelivery";
 import { resend } from "@/lib/resend";
 
 export async function POST(
@@ -93,7 +89,7 @@ export async function POST(
 
     const { data: asset, error: assetError } = await supabase
       .from("download_assets")
-      .select("id, asset_name, asset_url, storage_bucket, storage_path")
+      .select("id, asset_name, asset_url")
       .eq("id", downloadAssetId)
       .eq("active", true)
       .maybeSingle();
@@ -106,19 +102,39 @@ export async function POST(
       );
     }
 
-    if (!asset.asset_url && !(asset.storage_bucket && asset.storage_path)) {
+    if (!asset.asset_url) {
       return NextResponse.json(
         {
-          error:
-            "This planner asset is missing its PDF URL or storage reference, so it cannot be resent.",
+          error: "This planner asset has no PDF URL, so it cannot be resent.",
         },
         { status: 400 }
       );
     }
 
-    const buffer = await fetchAssetBuffer(supabase, asset);
-    const filename = `${asset.asset_name || order.product_sku || "ventariq-planner"}.pdf`;
-    const downloadUrl = await resolveAssetDownloadUrl(supabase, asset, 60 * 60 * 24 * 7);
+    if (!order.stripe_checkout_session_id) {
+      return NextResponse.json(
+        { error: "This order has no payment reference for a controlled download link" },
+        { status: 400 }
+      );
+    }
+
+    const { data: purchase, error: purchaseError } = await supabase
+      .from("purchases")
+      .select("payment_reference")
+      .eq("payment_reference", order.stripe_checkout_session_id)
+      .eq("status", "success")
+      .maybeSingle();
+
+    if (purchaseError) throw purchaseError;
+    if (!purchase) {
+      return NextResponse.json(
+        { error: "No successful purchase record exists for this order" },
+        { status: 400 }
+      );
+    }
+
+    const base = process.env.WEBSITE_URL || "https://stratxct.com";
+    const downloadUrl = `${base}/api/download/${encodeURIComponent(order.stripe_checkout_session_id)}`;
 
     const { error: sendError } = await resend.emails.send({
       to: order.customers.email,
@@ -126,11 +142,10 @@ export async function POST(
       subject: `Your ${asset.asset_name || "Ventariq"} Planner`,
       html: `
         <p>Hello ${order.customers.full_name ?? ""},</p>
-        <p>Here is your Ventariq planner again. It is attached to this email and also available to download here:</p>
+        <p>Here is your Ventariq planner download link. It can be used up to three times within seven days, and each download authorization is valid for five minutes:</p>
         <p><a href="${downloadUrl}">Download your planner</a></p>
         <p>Best regards,<br/>Ventariq</p>
       `,
-      attachments: [{ filename, content: buffer.toString("base64") }],
     });
 
     if (sendError) throw sendError;
