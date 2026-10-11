@@ -111,7 +111,7 @@ export default async function EventLandingPage({
         <div className="container">
           <div className="max-w-3xl">
             <h3 className="font-serif text-2xl font-bold leading-[1.07] text-[#152238] md:text-3xl">
-              Why travelers use the Ventariq {event.name} Planner
+              Why travelers need the Ventariq {event.name} Planner
             </h3>
 
             <p className="mt-4 text-[17px] leading-7 text-[#3F4650]">
