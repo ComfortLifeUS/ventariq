@@ -49,7 +49,7 @@ export default async function EventLandingPage({
   const plannerBenefits = [
     "Avoid costly planning mistakes. Compare hotel zones, transportation choices and race-week spending decisions.",
     "Navigate race weekend confidently. Prepare for venue access, crowds, transportation and post-race exits.",
-    "Experience more of Las Vegas. Organize dining, entertainment and attractions around your race schedule.",
+    `Experience more of ${event.name}. Organize dining, entertainment and attractions around your race schedule.`,
   ];
 
   return (
