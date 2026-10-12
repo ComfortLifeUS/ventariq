@@ -59,7 +59,7 @@ export default async function EventLandingPage({
           <p className="mb-3.5 text-[12.5px] font-bold uppercase tracking-[0.12em] text-[#B8863B]">
             {event.eyebrow}
           </p>
-          <h1 className="max-w-2xl font-serif text-5xl font-bold leading-[1.07] text-white">
+          <h1 className="max-w-2xl font-serif text-[33.6px] font-bold leading-[1.07] text-white">
             {event.name} Experience Planner
           </h1>
           <p className="mt-5 max-w-xl text-[17px] text-[#C9C2A8]">
