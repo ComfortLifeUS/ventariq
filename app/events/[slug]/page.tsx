@@ -47,9 +47,9 @@ export default async function EventLandingPage({
   const flagshipPlan = event.plans?.[0];
 
   const plannerBenefits = [
-    `Practical planning information for ${event.name}`,
-    "Transportation, accommodation and destination guidance",
-    "Event-day planning and useful travel intelligence",
+    "Avoid costly planning mistakes. Compare hotel zones, transportation choices and race-week spending decisions.",
+    "Navigate race weekend confidently. Prepare for venue access, crowds, transportation and post-race exits.",
+    "Experience more of Las Vegas. Organize dining, entertainment and attractions around your race schedule.",
   ];
 
   return (
