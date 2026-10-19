@@ -46,11 +46,10 @@ export default async function EventLandingPage({
   // in the plans table, so it silently failed at checkout.
   const flagshipPlan = event.plans?.[0];
 
-  const plannerBenefits = [
-    "Avoid costly planning mistakes. Compare hotel zones, transportation choices and race-week spending decisions.",
-    "Navigate race weekend confidently. Prepare for venue access, crowds, transportation and post-race exits.",
-    `Experience more of ${event.name}. Organize dining, entertainment and attractions around your race schedule.`,
-  ];
+  const plannerBenefits = [ "Avoid costly planning mistakes. Compare hotel zones, transportation options, and race-week spending decisions.",
+                           "Navigate race weekend with confidence. Prepare for venue access, crowds, transportation, and post-race exits.", 
+                           `Experience more of ${event.name}. Plan dining, entertainment, and attractions around your race schedule.`, 
+                          ];
 
   return (
     <main>
