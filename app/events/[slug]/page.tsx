@@ -46,10 +46,13 @@ export default async function EventLandingPage({
   // in the plans table, so it silently failed at checkout.
   const flagshipPlan = event.plans?.[0];
 
-  const plannerBenefits = [ "Avoid costly planning mistakes. Compare hotel zones, transportation options, and race-week spending decisions.",
-                           "Navigate race weekend with confidence. Prepare for venue access, crowds, transportation, and post-race exits.", 
-                           `Experience more of ${event.name}. Plan dining, entertainment, and attractions around your race schedule.`, 
-                          ];
+  
+const plannerBenefits = [
+  "Avoid costly event-day surprises. Prepare for entry procedures, security checks, crowd movement, and transport disruptions.",
+  "Make smarter travel decisions. Compare accommodation locations, transport options, and event-related expenses before committing.",
+  "Keep your entire experience organized. Use practical checklists, planning worksheets, and budget tools to prepare with confidence.",
+];
+
 
   return (
     <main>
@@ -90,8 +93,15 @@ export default async function EventLandingPage({
       <section className="flex flex-col gap-8 py-20 md:gap-12 md:mt-10">
         <div className="container">
           <h2 className="mb-5 text-[21.5px] font-bold uppercase tracking-[0.12em] text-[#B8863B]">
-            Inside the Planner
+            See What's Inside the Ventariq Planner
           </h2>
+          
+<p className="mt-3 text-[15px] leading-7 text-[#3F4650]">
+  Preview what is included in your Ventariq Complete Experience Planner,
+  designed to help you organize your trip, prepare for event day,
+  and make informed decisions before you travel.
+</p>
+
 
           {event.saleImage && (
             <div className="overflow-hidden rounded-lg">
@@ -146,11 +156,12 @@ export default async function EventLandingPage({
                   Get the Planner
                 </p>
                 <h3 className="font-serif text-3xl font-bold">
-                  Plan your {event.name} experience with confidence.
+                  Make Every Part of Your {event.name} Experience Count.
                 </h3>
                 <p className="mt-4 text-[15px] leading-6 text-[#C9C2A8]">
-                  Get the complete Ventariq planner and have the
-                  practical information you need in one place.
+                  Spend less time figuring things out and more time enjoying
+                  your experience. Get practical event intelligence, travel
+                  planning guidance, and useful tools in one organized planner.
                 </p>
               </div>
               <div className="container">
