@@ -1,5 +1,5 @@
 // app/events/[slug]/page.tsx
-
+// Staging deployment verification - November 1, 2026
 
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
