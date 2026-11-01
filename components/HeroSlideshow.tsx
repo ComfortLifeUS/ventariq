@@ -42,7 +42,7 @@ export default function HeroSlideshow({ slides }: { slides: Slide[] }) {
             alt={slide.alt}
             fill
             priority={i === 0}
-            className="object-cover object-center h-full w-full"
+            className="object-contain object-center h-full w-full"
           />
         </div>
       ))}
