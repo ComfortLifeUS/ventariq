@@ -48,9 +48,9 @@ export default async function EventLandingPage({
 
   
 const plannerBenefits = [
-  "Avoid costly event-day surprises. Prepare for entry procedures, security checks, crowd movement, and transport disruptions.",
-  "Make smarter travel decisions. Compare accommodation locations, transport options, and event-related expenses before committing.",
-  "Keep your entire experience organized. Use practical checklists, planning worksheets, and budget tools to prepare with confidence.",
+  "Avoid event-day chaos. Prepare for crowds, security, transport and exits.",
+  "Make smarter decisions. Compare hotels, transport and spending before you book.",
+  "Plan with confidence. Use practical checklists, worksheets and budget tools.",
 ];
 
 
@@ -156,12 +156,10 @@ const plannerBenefits = [
                   Get the Planner
                 </p>
                 <h3 className="font-serif text-3xl font-bold">
-                  Make Every Part of Your {event.name} Experience Count.
+                  Make Every Moment of Your {event.name} Experience Count.
                 </h3>
                 <p className="mt-4 text-[15px] leading-6 text-[#C9C2A8]">
-                  Spend less time figuring things out and more time enjoying
-                  your experience. Get practical event intelligence, travel
-                  planning guidance, and useful tools in one organized planner.
+                  Less guesswork. Fewer costly mistakes. More time to enjoy your event.
                 </p>
               </div>
               <div className="container">
