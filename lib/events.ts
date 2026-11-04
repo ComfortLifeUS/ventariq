@@ -173,11 +173,23 @@ export async function getLocationCategories(locationId: string) {
 export async function resolveSku(sku: string) {
   const supabase = await createClient();
 
-  const { data: plan } = await supabase
-    .from("plans")
-    .select("*, events(slug, eyebrow)")
-    .eq("sku", sku)
-    .maybeSingle();
+  const { data: plan, error: planError } = await supabase
+  .from("plans")
+  .select("*, events(slug, eyebrow)")
+  .eq("sku", sku)
+  .maybeSingle();
+
+if (planError) {
+  console.error("CHECKOUT PLAN LOOKUP ERROR:", {
+    code: planError.code,
+    message: planError.message,
+  });
+}
+
+console.log("CHECKOUT PLAN LOOKUP:", {
+  sku,
+  found: Boolean(plan),
+});;
 
   if (plan) {
     return {
