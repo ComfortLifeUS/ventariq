@@ -190,14 +190,24 @@ console.log("CHECKOUT PLAN LOOKUP:", {
   sku,
   found: Boolean(plan),
 });;
+let eventSlug: string | undefined;
 
+if (plan?.event_id) {
+  const { data: event } = await supabase
+    .from("events")
+    .select("slug")
+    .eq("id", plan.event_id)
+    .maybeSingle();
+
+  eventSlug = event?.slug;
+}
   if (plan) {
     return {
       kind: "plan" as const,
       sku: plan.sku,
       name: plan.name,
       price: plan.price != null ? Number(plan.price) : 0,
-     eventSlug: undefined,
+    eventSlug,
       
     };
   }
