@@ -175,7 +175,7 @@ export async function resolveSku(sku: string) {
 
   const { data: plan, error: planError } = await supabase
   .from("plans")
-  .select("*, events(slug, eyebrow)")
+  .select("*")
   .eq("sku", sku)
   .maybeSingle();
 
@@ -197,7 +197,8 @@ console.log("CHECKOUT PLAN LOOKUP:", {
       sku: plan.sku,
       name: plan.name,
       price: plan.price != null ? Number(plan.price) : 0,
-      eventSlug: plan.events?.slug,
+     eventSlug: undefined,
+      
     };
   }
 
