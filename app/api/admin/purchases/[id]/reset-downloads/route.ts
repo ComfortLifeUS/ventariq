@@ -1,9 +1,8 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase-server";
-import { createAdminClient } from "@/lib/supabase-admin";
-
-const DOWNLOAD_LIMIT = 3;
-const ACCESS_WINDOW_DAYS = 7;
+import { createAdminClient } from "@/lib/supabase-admin";7
+const DOWNLOAD_LIMIT = 7;
+const ACCESS_WINDOW_DAYS = 30;
 
 export async function POST(
   _request: Request,
