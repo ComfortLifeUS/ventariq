@@ -281,10 +281,12 @@ async function deliverStoredAsset(
       from: process.env.FROM_EMAIL || "Ventariq <info@stratxct.com>",
       subject: `Your ${asset.asset_name || "Ventariq"} Planner Is Ready`,
       html: `
-        <p>Hello ${customer.full_name ?? ""},</p>
-        <p>Thank you for your purchase. Your planner is available to download here. You can download your planner up to 10 times within 30 days of purchase. Please save a copy to your device for future use.</p>
-        <p><a href="${downloadUrl}">Download your planner</a></p>
-        <p>Best regards,<br/>Ventariq</p>
+<p>Hello ${customer.full_name ?? ""},</p>
+<p>Thank you for your purchase! Your Ventariq Complete Experience Planner is ready.</p>
+<p><a href="${downloadUrl}">Download Your Planner</a></p>
+<p><strong>Important:</strong> For the best experience, download and save the PDF to your phone, tablet, or computer rather than viewing it directly in your browser. This helps you enjoy the interactive features, including clickable Contents, navigation buttons, QR-code links, and fillable planning sections.</p>
+<p>You can download your planner up to 10 times within 30 days of purchase. We recommend saving a copy for future use.</p>
+<p>Best regards,<br/>Ventariq<br/>Plan Less. Experience More.</p>
       `,
     });
     if (emailError) throw emailError;
