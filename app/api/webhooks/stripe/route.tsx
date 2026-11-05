@@ -282,7 +282,7 @@ async function deliverStoredAsset(
       subject: `Your ${asset.asset_name || "Ventariq"} Planner Is Ready`,
       html: `
         <p>Hello ${customer.full_name ?? ""},</p>
-        <p>Thank you for your purchase. Your planner is available to download here. You have three download authorizations over seven days.</p>
+        <p>Thank you for your purchase. Your planner is available to download here. You can download your planner up to 10 times within 30 days of purchase. Please save a copy to your device for future use.</p>
         <p><a href="${downloadUrl}">Download your planner</a></p>
         <p>Best regards,<br/>Ventariq</p>
       `,
