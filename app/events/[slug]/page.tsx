@@ -71,10 +71,14 @@ const plannerBenefits = event.slug === "abu_dhabi"
             {event.eyebrow}
           </p>
           <h1 className="max-w-2xl font-serif text-[33.6px] font-bold leading-[1.07] text-white">
-            {event.name} Experience Planner
+           {event.slug === "abu_dhabi"
+  ? "Abu Dhabi 2026: Make Race Weekend Easier to Navigate"
+  : `${event.name} Experience Planner`}
           </h1>
           <p className="mt-5 max-w-xl text-[17px] text-[#C9C2A8]">
-            {event.description}
+           {event.slug === "abu_dhabi"
+  ? "From Yas Marina Circuit entry and concert access to transport, accommodation and local rules, plan the details before you arrive. Spend less time figuring things out and more time enjoying your experience."
+  : event.description}
           </p>
           {event.status === "past" && (
             <span className="mt-6 inline-block rounded-[20px] border border-white/20 bg-white/[0.06] px-4 py-2 text-xs uppercase tracking-widest text-white/60">
