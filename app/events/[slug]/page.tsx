@@ -48,7 +48,7 @@ export default async function EventLandingPage({
 
   
 
-const plannerBenefits = event.slug === "abu_dhabi"
+const plannerBenefits = event.slug?.toLowerCase() === "abu_dhabi"
   ? [
       "Know before you go. Prepare for Yas Marina Circuit entry, security, crowds, and event-day movement.",
       "Avoid expensive surprises. Compare accommodation, transportation, and spending before making decisions.",
