@@ -47,11 +47,20 @@ export default async function EventLandingPage({
   const flagshipPlan = event.plans?.[0];
 
   
-const plannerBenefits = [
-  "Avoid event-day chaos. Prepare for crowds, security, transport and exits.",
-  "Make smarter decisions. Compare hotels, transport and spending before you book.",
-  "Plan with confidence. Use practical checklists, worksheets and budget tools.",
-];
+
+const plannerBenefits = event.slug === "abu_dhabi"
+  ? [
+      "Know before you go. Prepare for Yas Marina Circuit entry, security, crowds, and event-day movement.",
+      "Avoid expensive surprises. Compare accommodation, transportation, and spending before making decisions.",
+      "Plan beyond the race. Navigate concert access, local rules, and practical travel considerations with greater confidence.",
+    ]
+  : [
+      "Avoid event-day chaos. Prepare for crowds, security, transport and exits.",
+      "Make smarter decisions. Compare hotels, transport and spending before you book.",
+      "Plan with confidence. Use practical checklists, worksheets and budget tools.",
+    ];
+
+ 
 
 
   return (
