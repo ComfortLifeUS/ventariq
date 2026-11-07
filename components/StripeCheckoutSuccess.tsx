@@ -145,7 +145,7 @@ function SuccessContent() {
           <>
             <h1 className="font-serif text-3xl font-bold text-white">Your planner is ready.</h1>
             <p className="mt-4 text-[15px] text-[#C9C2A8]">
-              We&apos;ve emailed a controlled download link too. You have three download authorizations over seven days; each link is valid for five minutes.
+              We&apos;ve emailed a controlled download link too. You have ten download authorizations over thirty days; each link is valid for five minutes.
             </p>
             {downloadUrl ? (
               <a

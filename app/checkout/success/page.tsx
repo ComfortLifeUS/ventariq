@@ -87,7 +87,7 @@ export default async function CheckoutSuccessPage({
   const supabaseAdmin = createAdminClient();
   const { data, error } = await supabaseAdmin
     .from("purchases")
-    .select("status, amount, currency, downloads_used, download_limit, download_expires_at, download_assets(asset_name)")
+    .select("status, amount, currency, downloads_used, download_limit, download_expires_at")
     .eq("payment_reference", reference)
     .maybeSingle();
 

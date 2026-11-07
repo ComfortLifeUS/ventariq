@@ -1,5 +1,5 @@
 // app/events/[slug]/page.tsx
-
+// Staging deployment verification - November 1, 2026
 
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -46,10 +46,22 @@ export default async function EventLandingPage({
   // in the plans table, so it silently failed at checkout.
   const flagshipPlan = event.plans?.[0];
 
-  const plannerBenefits = [ "Avoid costly planning mistakes. Compare hotel zones, transportation options, and race-week spending decisions.",
-                           "Navigate race weekend with confidence. Prepare for venue access, crowds, transportation, and post-race exits.", 
-                           `Experience more of ${event.name}. Plan dining, entertainment, and attractions around your race schedule.`, 
-                          ];
+  
+
+const plannerBenefits = event.slug?.toLowerCase() === "abu_dhabi"
+  ? [
+      "Know before you go. Prepare for Yas Marina Circuit entry, security, crowds, and event-day movement.",
+      "Avoid expensive surprises. Compare accommodation, transportation, and spending before making decisions.",
+      "Plan beyond the race. Navigate concert access, local rules, and practical travel considerations with greater confidence.",
+    ]
+  : [
+      "Avoid event-day chaos. Prepare for crowds, security, transport and exits.",
+      "Make smarter decisions. Compare hotels, transport and spending before you book.",
+      "Plan with confidence. Use practical checklists, worksheets and budget tools.",
+    ];
+
+ 
+
 
   return (
     <main>
@@ -59,10 +71,14 @@ export default async function EventLandingPage({
             {event.eyebrow}
           </p>
           <h1 className="max-w-2xl font-serif text-[33.6px] font-bold leading-[1.07] text-white">
-            {event.name} Experience Planner
+           {event.slug === "abu_dhabi"
+  ? "Abu Dhabi 2026: Make Race Weekend Easier to Navigate"
+  : `${event.name} Experience Planner`}
           </h1>
           <p className="mt-5 max-w-xl text-[17px] text-[#C9C2A8]">
-            {event.description}
+           {event.slug === "abu_dhabi"
+  ? "From Yas Marina Circuit entry and concert access to transport, accommodation and local rules, plan the details before you arrive. Spend less time figuring things out and more time enjoying your experience."
+  : event.description}
           </p>
           {event.status === "past" && (
             <span className="mt-6 inline-block rounded-[20px] border border-white/20 bg-white/[0.06] px-4 py-2 text-xs uppercase tracking-widest text-white/60">
@@ -90,8 +106,15 @@ export default async function EventLandingPage({
       <section className="flex flex-col gap-8 py-20 md:gap-12 md:mt-10">
         <div className="container">
           <h2 className="mb-5 text-[21.5px] font-bold uppercase tracking-[0.12em] text-[#B8863B]">
-            Inside the Planner
+            See What's Inside the Ventariq Planner
           </h2>
+          
+<p className="mt-3 text-[15px] leading-7 text-[#3F4650]">
+  Preview what is included in your Ventariq Complete Experience Planner,
+  designed to help you organize your trip, prepare for event day,
+  and make informed decisions before you travel.
+</p>
+
 
           {event.saleImage && (
             <div className="overflow-hidden rounded-lg">
@@ -146,11 +169,10 @@ export default async function EventLandingPage({
                   Get the Planner
                 </p>
                 <h3 className="font-serif text-3xl font-bold">
-                  Plan your {event.name} experience with confidence.
+                  Make Every Moment of Your {event.name} Experience Count.
                 </h3>
                 <p className="mt-4 text-[15px] leading-6 text-[#C9C2A8]">
-                  Get the complete Ventariq planner and have the
-                  practical information you need in one place.
+                  Less guesswork. Fewer costly mistakes. More time to enjoy your event.
                 </p>
               </div>
               <div className="container">

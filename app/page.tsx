@@ -18,7 +18,7 @@ export default async function Home() {
   const events = await getEvents();
   const upcomingEvents = events.filter((e) => e.status === "upcoming");
   const pastEvents = events.filter((e) => e.status === "past");
-  const slides = events
+  const slides = upcomingEvents
     .filter((e) => !!e.heroImage)
     .map((e) => ({ src: e.heroImage as string, alt: `${e.name} Experience Planner` }));
 

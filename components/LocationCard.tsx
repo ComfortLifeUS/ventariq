@@ -11,8 +11,12 @@ export default function LocationCard({
   eventSlug: string;
   location: Location;
 }) {
-  const guideSku = `${eventSlug}_${location.slug}_guide`;
-
+  const guideSku =
+  eventSlug.toLowerCase() === "abu_dhabi"
+    ? "Ventariq_Abu_Dhabi_2026"
+    : eventSlug === "Las_Vegas"
+      ? "Ventariq_Complete_Las_Vegas_2026"
+      : `${eventSlug}_${location.slug}_guide`;
   return (
     <div className="group rounded-[11px] border border-[#D8D2C2] bg-white p-6 transition-all hover:-translate-y-1 hover:shadow-[0_18px_40px_-22px_rgba(21,34,56,0.35)]">
      

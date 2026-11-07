@@ -173,19 +173,42 @@ export async function getLocationCategories(locationId: string) {
 export async function resolveSku(sku: string) {
   const supabase = await createClient();
 
-  const { data: plan } = await supabase
-    .from("plans")
-    .select("*, events(slug, eyebrow)")
-    .eq("sku", sku)
+  const { data: plan, error: planError } = await supabase
+  .from("plans")
+  .select("*")
+  .eq("sku", sku)
+  .maybeSingle();
+
+if (planError) {
+  console.error("CHECKOUT PLAN LOOKUP ERROR:", {
+    code: planError.code,
+    message: planError.message,
+  });
+}
+
+console.log("CHECKOUT PLAN LOOKUP:", {
+  sku,
+  found: Boolean(plan),
+});;
+let eventSlug: string | undefined;
+
+if (plan?.event_id) {
+  const { data: event } = await supabase
+    .from("events")
+    .select("slug")
+    .eq("id", plan.event_id)
     .maybeSingle();
 
+  eventSlug = event?.slug;
+}
   if (plan) {
     return {
       kind: "plan" as const,
       sku: plan.sku,
       name: plan.name,
       price: plan.price != null ? Number(plan.price) : 0,
-      eventSlug: plan.events?.slug,
+    eventSlug,
+      
     };
   }
 
