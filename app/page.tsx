@@ -16,7 +16,10 @@ const SPORT_ICONS: Record<string, string> = {
 
 export default async function Home() {
   const events = await getEvents();
-  const upcomingEvents = events.filter((e) => e.status === "upcoming");
+  const upcomingEvents = events.filter((e) => e.status === "upcoming").sort((a, b) => {
+    const rank = (slug: string) => slug.toLowerCase() === "las_vegas" ? 0 : slug.toLowerCase() === "abu_dhabi" ? 1 : 2;
+    return rank(a.slug) - rank(b.slug);
+  });
   const pastEvents = events.filter((e) => e.status === "past");
   const slides = upcomingEvents
     .filter((e) => !!e.heroImage)
@@ -25,7 +28,7 @@ export default async function Home() {
   return (
     <main>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-[#0D1420] py-28 pb-24 text-white md:min-h-[640px] min-h-[100%]">
+      <section className="relative overflow-hidden bg-[#0D1420] py-8 md:py-28 md:pb-24 text-white md:min-h-[640px] min-h-[100%]">
         <div
           className="absolute inset-0"
           style={{
@@ -35,8 +38,8 @@ export default async function Home() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0D1420]/70 via-[#0D1420]/85 to-[#0D1420]" />
 
-        <div className="container relative z-10 grid items-end gap-14 md:grid-cols-[1.05fr_0.95fr]">
-          <div className="max-w-[650px] rounded-[10px] bg-[#0D1420]/90 px-6 py-10 md:px-10 md:py-14">
+        <div className="container relative z-10 grid items-end gap-8 md:gap-14 md:grid-cols-[1.05fr_0.95fr]">
+          <div className="max-w-[650px] rounded-[10px] bg-[#0D1420]/90 px-4 py-5 md:px-10 md:py-14">
             <span className="mb-5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.12em] text-[#B8863B]">
               <span className="h-[1.5px] w-[22px] bg-[#B8863B]" />
               Event Intelligence, Not Guesswork
@@ -56,7 +59,7 @@ export default async function Home() {
 
             <div className="mb-10 flex flex-wrap gap-3.5">
               <Link
-                href="/events"
+                href="#editions"
                 className="rounded-[5px] bg-[#B8863B] px-6.5 py-3.5 text-[15px] font-bold text-[#0D1420] transition-colors hover:bg-[#c99a4d]"
               >
                 Browse Current Editions
@@ -65,7 +68,7 @@ export default async function Home() {
 
             <div className="flex flex-wrap">
               {[
-                { num: String(upcomingEvents.length || 2), lbl: "Events live for 2026" },
+                { num: String(upcomingEvents.length), lbl: "Current event editions" },
                 { num: "30+", lbl: "Pages per planner" },
                 { num: "6", lbl: "Intelligence labels for clearer decision-making" },
               ].map((stat) => (
@@ -95,16 +98,16 @@ export default async function Home() {
               Now Live
             </p>
             <h2 className="mt-2 font-serif text-3xl font-bold">
-              See what&apos;s inside each events.
+              Explore our current event planners.
             </h2>
           </div>
         </section>
       )}
 
       {/* EDITIONS */}
-      <section id="editions" className="py-20">
+      <section id="editions" className="scroll-mt-28 py-10 md:py-20">
         <div className="container">
-          <div className="mb-13 max-w-[660px]">
+          <div className="mb-7 md:mb-13 max-w-[660px]">
             <p className="mb-3.5 text-[12.5px] font-bold uppercase tracking-[0.12em] text-[#8C6423]">
               Current Events
             </p>
@@ -113,9 +116,7 @@ export default async function Home() {
               {upcomingEvents.length} complete planner{upcomingEvents.length !== 1 ? "s" : ""}.
             </h2>
             <p className="text-base text-[#5A6472]">
-              Every Ventariq planner is a single flagship planner per event —
-              comprehensive rather than fragmented, so there&apos;s one
-              clear thing to buy and one clear thing to trust.
+              One complete digital planner per event. Practical guidance, interactive tools and instant delivery after purchase.
             </p>
           </div>
 
@@ -133,9 +134,9 @@ export default async function Home() {
 
       {/* PAST EDITIONS */}
       {pastEvents.length > 0 && (
-        <section id="past-editions" className="bg-[#F4F1EA] py-20">
+        <section id="past-editions" className="bg-[#F4F1EA] py-10 md:py-20">
           <div className="container">
-            <div className="mb-13 max-w-[660px]">
+            <div className="mb-7 md:mb-13 max-w-[660px]">
               <p className="mb-3.5 text-[12.5px] font-bold uppercase tracking-[0.12em] text-[#5A6472]">
                 Past Events
               </p>
@@ -143,9 +144,7 @@ export default async function Home() {
                 Concluded.
               </h2>
               <p className="text-base text-[#5A6472]">
-                These events have wrapped, but the planners remain
-                available — useful if you&apos;re researching how we
-                cover an event before the next edition goes live.
+                These historical editions remain available for reference. Event-specific dates, prices, schedules and travel information may be outdated.
               </p>
             </div>
 
@@ -161,17 +160,15 @@ export default async function Home() {
       {/* INTELLIGENCE DESK */}
       <section id="desk" className="bg-[#FCFBF8] py-20">
         <div className="container">
-          <div className="mb-13 max-w-[660px]">
+          <div className="mb-7 md:mb-13 max-w-[660px]">
             <p className="mb-3.5 text-[12.5px] font-bold uppercase tracking-[0.12em] text-[#8C6423]">
               Event Intelligence Desk
             </p>
             <h2 className="mb-3.5 font-serif text-[33px] font-bold text-[#152238]">
-              A living product, not just a static download.
+              Event intelligence and edition status.
             </h2>
             <p className="text-base text-[#5A6472]">
-              Events get real, versioned updates when time-sensitive
-              details change — this is where we keep track of what&apos;s
-              live, what&apos;s next, and what&apos;s being revised.
+              Track current and archived editions. Use the official-source links in your planner to check time-sensitive details before traveling.
             </p>
           </div>
 
@@ -192,7 +189,7 @@ export default async function Home() {
             ))}
             <DeskRow
               icon="↻"
-              title="Real-Time Event updates"
+              title="Official-source information links"
               status="Ongoing"
               statusColor="bg-[#EDEEF1] text-[#2A3E5C]"
             />
@@ -201,9 +198,9 @@ export default async function Home() {
       </section>
 
       {/* THE VENTARIQ DIFFERENCE */}
-      {/* <section id="difference" className="bg-[#F4F1EA] py-20">
+      {/* <section id="difference" className="bg-[#F4F1EA] py-10 md:py-20">
         <div className="container">
-          <div className="mb-13 max-w-[660px]">
+          <div className="mb-7 md:mb-13 max-w-[660px]">
             <p className="mb-3.5 text-[12.5px] font-bold uppercase tracking-[0.12em] text-[#8C6423]">
               The Ventariq Difference
             </p>
@@ -245,7 +242,7 @@ export default async function Home() {
       {/* HOW WE WORK */}
       <section id="how-we-work" className="py-20 bg-[#F4F1EA]">
         <div className="container">
-          <div className="mb-13 max-w-[660px]">
+          <div className="mb-7 md:mb-13 max-w-[660px]">
             <p className="mb-3.5 text-[12.5px] font-bold uppercase tracking-[0.12em] text-[#8C6423]">
               Research Standard
             </p>
