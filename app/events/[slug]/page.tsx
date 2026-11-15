@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Image from "next/image";
 import LocationCard from "@/components/LocationCard";
+import PurchaseButton from "@/components/PurchaseButton";
 import { getEvent } from "@/lib/events";
 
 export async function generateMetadata({
@@ -142,7 +143,7 @@ export default async function EventLandingPage({
               </div>
             </div>
           )}
-          {showAbuDhabiSales && <p className="mt-3 text-sm text-white/80"><a href="/faq" className="underline underline-offset-4">Read our refund policy</a></p>}
+          {showAbuDhabiSales && <p className="mt-3 text-sm text-white/80"><a href="/faq#refund-policy" className="underline underline-offset-4">Read our refund policy</a></p>}
         </div>
       </section>
 
@@ -195,7 +196,9 @@ export default async function EventLandingPage({
               ))}
             </div>
             <div className="mt-6 text-center">
-              <a href="#get-abu-dhabi-planner" className="inline-block rounded-lg bg-[#FFD34D] px-7 py-4 text-base font-bold text-[#0D1420]">Get the Planner – $29.99</a>
+              <div className="[&_button]:rounded-lg [&_button]:px-7 [&_button]:py-4 [&_button]:text-base [&_button]:!bg-[#FFD34D] [&_button:hover]:!bg-[#F5C443]">
+                <PurchaseButton sku="Ventariq_Abu_Dhabi_2026" />
+              </div>
               <p className="mt-2 text-sm text-[#3F4650]">One-time purchase · Instant digital delivery</p>
             </div>
           </div>
@@ -348,7 +351,7 @@ export default async function EventLandingPage({
                   are not included.
                 </p>
 
-                <p className="mt-3 text-sm text-white/80"><a href="/faq" className="underline underline-offset-4">Read our refund policy</a></p>
+                <p className="mt-3 text-sm text-white/80"><a href="/faq#refund-policy" className="underline underline-offset-4">Read our refund policy</a></p>
                 <p className="mt-4 font-semibold text-[#FFD34D]">
                   Ventariq. Plan Less. Experience More.
                 </p>
