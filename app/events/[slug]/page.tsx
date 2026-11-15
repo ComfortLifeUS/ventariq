@@ -1,4 +1,3 @@
-
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -78,7 +77,8 @@ export default async function EventLandingPage({
   return (
     <main>
       <section className="bg-[#0D1420] py-20 text-white flex flex-col gap-5 md:gap-10">
-        <div className="container">
+        <div className={showAbuDhabiSales ? "container grid gap-8 md:grid-cols-2 md:items-center" : "container"}>
+          <div>
           <p className="mb-3.5 text-[12.5px] font-bold uppercase tracking-[0.12em] text-[#B8863B]">
             {event.eyebrow}
           </p>
@@ -120,22 +120,29 @@ export default async function EventLandingPage({
               This edition has concluded — shown for reference
             </span>
           )}
+          </div>
+          {showAbuDhabiSales && (
+            <div className="flex justify-center">
+              <Image src="/sale/abu-dhabi-cover.png" alt="Abu Dhabi 2026 Complete Experience Planner cover" width={688} height={1063} className="h-auto w-full max-w-[300px] rounded-lg shadow-2xl" priority />
+            </div>
+          )}
         </div>
 
-        <div className="container">
+        <div id={showAbuDhabiSales ? "get-abu-dhabi-planner" : undefined} className="container scroll-mt-28">
           {event.locations && event.locations.length > 0 && (
             <div>
-              <div className="grid gap-5 md:grid-cols-3">
+              <div className={showAbuDhabiSales ? "grid max-w-xl gap-5 [&_button]:w-full [&_button]:text-base" : "grid gap-5 md:grid-cols-3"}>
                 {event.locations.map((location) => (
                   <LocationCard
                     key={location.slug}
                     eventSlug={event.slug}
-                    location={location}
+                    location={showAbuDhabiSales ? { ...location, description: "Ticket and concert guidance ✓ Hotel and transport strategies ✓ Interactive budget and race-day planning tools" } : location}
                   />
                 ))}
               </div>
             </div>
           )}
+          {showAbuDhabiSales && <p className="mt-3 text-sm text-white/80"><a href="/faq" className="underline underline-offset-4">Read our refund policy</a></p>}
         </div>
       </section>
 
@@ -186,6 +193,10 @@ export default async function EventLandingPage({
                   </p>
                 </div>
               ))}
+            </div>
+            <div className="mt-6 text-center">
+              <a href="#get-abu-dhabi-planner" className="inline-block rounded-lg bg-[#FFD34D] px-7 py-4 text-base font-bold text-[#0D1420]">Get the Planner – $29.99</a>
+              <p className="mt-2 text-sm text-[#3F4650]">One-time purchase · Instant digital delivery</p>
             </div>
           </div>
         )}
@@ -310,7 +321,7 @@ export default async function EventLandingPage({
                 )}
               </div>
 
-              <div className="container">
+              <div className={showAbuDhabiSales ? "w-full md:max-w-lg [&_button]:w-full [&_button]:text-base" : "container"}>
                 {event.locations && event.locations.length > 0 && (
                   <div>
                     <div>
@@ -318,7 +329,7 @@ export default async function EventLandingPage({
                         <LocationCard
                           key={location.slug}
                           eventSlug={event.slug}
-                          location={location}
+                          location={showAbuDhabiSales ? { ...location, description: "Ticket and concert guidance ✓ Hotel and transport strategies ✓ Interactive budget and race-day planning tools" } : location}
                         />
                       ))}
                     </div>
@@ -337,6 +348,7 @@ export default async function EventLandingPage({
                   are not included.
                 </p>
 
+                <p className="mt-3 text-sm text-white/80"><a href="/faq" className="underline underline-offset-4">Read our refund policy</a></p>
                 <p className="mt-4 font-semibold text-[#FFD34D]">
                   Ventariq. Plan Less. Experience More.
                 </p>
