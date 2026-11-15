@@ -3,62 +3,46 @@
 import Link from "next/link";
 import type { EventItem } from "@/lib/events";
 
-/**
- * EditionCard — Ventariq
- *
- * Shared between the homepage and /events index. Each event is
- * presented as a single flagship "edition" — dark banner with dates,
- * white body with meta pills and a "View the planner" link.
- */
-
-const GRADIENTS = [
-  "linear-gradient(155deg, #11263e, #0d1420 58%, #8C1C2B 165%)",
-  "linear-gradient(155deg, #101d31, #0d1420 55%, #8C6423 165%)",
-];
-
-export default function EditionCard({
-  event,
-  gradientIndex = 0,
-}: {
+export default function EditionCard({ event }: {
   event: EventItem;
   gradientIndex?: number;
 }) {
-  const gradient = GRADIENTS[gradientIndex % GRADIENTS.length];
+  const slug = event.slug.toLowerCase();
+  const upcoming = event.status === "upcoming";
+  const vegas = slug === "las_vegas";
+  const abu = slug === "abu_dhabi";
+  const dates = vegas ? "November 19–21, 2026" : abu ? "December 3–6, 2026" : null;
+  const description = upcoming && vegas
+    ? "Plan your Las Vegas race weekend with hotel guidance, transport strategies, race-day logistics and a smarter post-race exit."
+    : upcoming && abu
+      ? "Plan your Abu Dhabi race weekend with ticket and concert guidance, hotel and transport strategies, local travel essentials and interactive planning tools."
+      : event.description;
+  const prices = (event.locations ?? []).map((location) => Number(location.basePrice)).filter((price) => Number.isFinite(price) && price > 0);
+  const price = prices.length > 0 && prices.every((p) => p === prices[0]) ? prices[0] : null;
 
   return (
-    <Link
-      href={`/events/${event.slug}`}
-      className="group overflow-hidden rounded-[11px] bg-white shadow-[0_18px_40px_-22px_rgba(21,34,56,0.35)] transition-all hover:-translate-y-1 hover:shadow-[0_26px_50px_-20px_rgba(21,34,56,0.4)]"
-    >
-      <div
-        className="relative flex h-[180px] flex-col justify-end overflow-hidden p-5.5 text-white bg-[#880000]"
-      >
+    <Link href={`/events/${event.slug}`} className="group flex h-full flex-col overflow-hidden rounded-[11px] bg-white shadow-[0_18px_40px_-22px_rgba(21,34,56,0.35)] transition-all hover:-translate-y-1 hover:shadow-[0_26px_50px_-20px_rgba(21,34,56,0.4)]">
+      <div className="relative flex min-h-[160px] flex-col justify-end overflow-hidden bg-[#880000] px-5 pb-5 pt-14 text-white md:min-h-[180px]">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50" />
-        <span className="absolute right-4.5 top-4.5 z-10 rounded-[20px] border border-white/30 bg-white/[0.14] px-2.5 py-1 text-[11px] tracking-[0.03em]">
-          {event.status === "upcoming" ? "2026 Event" : "Past Event"}
+        <span className="absolute right-4 top-4 z-10 rounded-full border border-white/30 bg-white/[0.14] px-3 py-1 text-[11px]">
+          {upcoming ? "Available Now" : "Past Event"}
         </span>
-        <div className="relative z-10 mb-1.5 text-xs font-bold uppercase tracking-[0.08em] text-[#B8863B]">
-          {event.sport}
-        </div>
-        <h3 className="relative z-10 font-serif text-2xl text-white">
-          {event.name} Experience Planner
-        </h3>
+        <div className="relative z-10 mb-2 text-xs font-bold uppercase tracking-wide text-[#FFD34D]">{event.sport}</div>
+        <h3 className="relative z-10 font-serif text-2xl text-white">{event.name} Experience Planner</h3>
+        {dates && <p className="relative z-10 mt-2 text-sm font-semibold text-[#FFD34D]">{dates}</p>}
       </div>
-      <div className="px-6.5 pb-7 pt-6">
-        <p className="mb-5 text-[14.5px] text-[#5A6472]">
-          {event.description}
-        </p>
-        {
-          event.status === "upcoming" ? <span className="inline-flex items-center gap-1.5 text-sm font-bold text-[#152238]">
-          View the planner
-          <span className="transition-transform group-hover:translate-x-1">
-            →
-          </span>
-          </span>
-          :
-          ""
-        }
-        
+      <div className="flex flex-1 flex-col px-6 py-5">
+        <p className="mb-4 text-[14.5px] leading-relaxed text-[#5A6472]">{description}</p>
+        <div className="mt-auto">
+          {upcoming ? <>
+            {price !== null && <p className="mb-1 text-xl font-bold text-[#152238]">${price.toFixed(2)} USD</p>}
+            <p className="mb-4 text-xs text-[#5A6472]">One-time purchase · Instant digital delivery</p>
+            <span className="flex w-full items-center justify-center rounded-md bg-[#B8863B] px-4 py-3 text-center text-sm font-bold text-[#0D1420] transition-colors group-hover:bg-[#c99a4d]">Explore &amp; Get the Planner →</span>
+          </> : <>
+            <p className="mb-3 text-sm font-semibold text-[#5A6472]">Historical edition · Event-specific information may be outdated.</p>
+            <span className="text-sm font-bold text-[#152238]">View historical edition →</span>
+          </>}
+        </div>
       </div>
     </Link>
   );

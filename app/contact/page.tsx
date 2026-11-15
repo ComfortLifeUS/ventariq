@@ -135,12 +135,7 @@ export default function ContactPage() {
                 >
                    info@stratxct.com 
                 </a>
-                 <a
-                  href="mailto:support@stratxct.com"
-                  className="text-[14px] text-[#5A6472] hover:text-[#152238] block"
-                >
-                   support@stratxct.com 
-                </a>
+                
               </div>
 
               <div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 const FAQS =[
@@ -77,6 +77,27 @@ const FAQS =[
 export default function FaqPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
+  useEffect(() => {
+    let frame = 0;
+    const openRefundPolicy = () => {
+      if (window.location.hash !== "#refund-policy") return;
+      const index = FAQS.findIndex((item) => item.q === "What is your refund policy?");
+      if (index === -1) return;
+      setOpenIndex(index);
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        document.getElementById("refund-policy")?.scrollIntoView({ block: "start" });
+      });
+    };
+    openRefundPolicy();
+    window.addEventListener("hashchange", openRefundPolicy);
+    return () => {
+      window.removeEventListener("hashchange", openRefundPolicy);
+      cancelAnimationFrame(frame);
+    };
+  }, []);
+
+
     const jsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -109,7 +130,11 @@ export default function FaqPage() {
             {FAQS.map((item, i) => {
               const open = openIndex === i;
               return (
-                <div key={item.q}>
+                <div
+                  key={item.q}
+                  id={item.q === "What is your refund policy?" ? "refund-policy" : undefined}
+                  className="scroll-mt-32"
+                >
                   <button
                     onClick={() => setOpenIndex(open ? null : i)}
                     className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
