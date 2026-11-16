@@ -123,24 +123,7 @@ export default function ChatWidget() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   // Proactively open once per browser session, a few seconds after the
-  // person arrives -- but never if they've already opened or dismissed
-  // it this session, so it's a nudge, not a nag.
-  useEffect(() => {
-    const alreadyEngaged = sessionStorage.getItem("ventariq-chat-engaged");
-    if (alreadyEngaged) return;
-
-    const pulseTimer = setTimeout(() => setPulse(true), 2000);
-    const openTimer = setTimeout(() => {
-      setOpen(true);
-      sessionStorage.setItem("ventariq-chat-engaged", "1");
-    }, 4000);
-
-    return () => {
-      clearTimeout(pulseTimer);
-      clearTimeout(openTimer);
-    };
-  }, []);
-
+ 
   function handleToggle() {
     sessionStorage.setItem("ventariq-chat-engaged", "1");
     setPulse(false);
