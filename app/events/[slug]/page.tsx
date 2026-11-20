@@ -98,8 +98,7 @@ export default async function EventLandingPage({
 
           <p className="mt-5 max-w-xl text-[17px] text-[#C9C2A8]">
             {showAbuDhabiSales
-              ? "You've invested in an extraordinary race weekend. Don't let ticket confusion, transport challenges, unexpected costs or missed experiences get in the way. Plan your entire Abu Dhabi experience with one intelligent, interactive travel planner."
-              : event.description}
+              ? "Make the most of your Abu Dhabi race weekend. Understand ticket and concert access, compare hotel and transport options, avoid costly planning mistakes, and organize your experience with one interactive planner. 102 fillable fields, a built-in budget calculator, clickable navigation and official-source information links."
           </p>
 
           {showAbuDhabiSales && (
@@ -220,7 +219,8 @@ export default async function EventLandingPage({
           </div>
         </div>
 
-        <div className="container">
+       {!showAbuDhabiSales && (
+  <div className="container">
           <div className="grid gap-5 md:grid-cols-3">
             {plannerBenefits.map((benefit, index) => (
               <div
@@ -235,9 +235,9 @@ export default async function EventLandingPage({
                 </p>
               </div>
             ))}
-          </div>
+          </div>)}
         </div>
-
+        )}
         {showAbuDhabiSales && (
           <>
             <div className="container">
