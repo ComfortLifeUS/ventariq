@@ -97,9 +97,13 @@ export default async function EventLandingPage({
           </h1>
 
           <p className="mt-5 max-w-xl text-[17px] text-[#C9C2A8]">
-            {showAbuDhabiSales
-              ? "Make the most of your Abu Dhabi race weekend. Understand ticket and concert access, compare hotel and transport options, avoid costly planning mistakes, and organize your experience with one interactive planner. 102 fillable fields, a built-in budget calculator, clickable navigation and official-source information links."
-          </p>
+           
+<p className="mt-5 max-w-xl text-[17px] text-[#C9C2A8]">
+  {showAbuDhabiSales
+    ? "Make the most of your Abu Dhabi race weekend. Understand ticket and concert access, compare hotel and transport options, avoid costly planning mistakes, and organize your experience with one interactive planner. 102 fillable fields, a built-in budget calculator, clickable navigation and official-source information links."
+    : event.description}
+</p>
+
 
           {showAbuDhabiSales && (
             <div className="mt-6">
