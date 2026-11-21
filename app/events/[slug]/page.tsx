@@ -237,7 +237,7 @@ export default async function EventLandingPage({
                 </p>
               </div>
             ))}
-          </div>)}
+          </div>
         </div>
         )}
         {showAbuDhabiSales && (
