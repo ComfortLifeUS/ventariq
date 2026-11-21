@@ -95,8 +95,6 @@ export default async function EventLandingPage({
               ? "Abu Dhabi 2026: Don't Just Attend. Experience It Better."
               : `${event.name} Experience Planner`}
           </h1>
-
-          <p className="mt-5 max-w-xl text-[17px] text-[#C9C2A8]">
            
 <p className="mt-5 max-w-xl text-[17px] text-[#C9C2A8]">
   {showAbuDhabiSales
