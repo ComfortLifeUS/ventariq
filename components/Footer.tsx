@@ -26,27 +26,30 @@ export default function Footer() {
               Plan Less. Experience More. Complete Experience Planners for
               the events worth flying for.
             </p>
-          </div>
+</div>     
+<div>
+  <h5 className="mb-4 font-serif text-[14.5px] font-bold text-white">
+    Current Editions
+  </h5>
+  <ul className="space-y-2.5">
+    <li>
+      <Link href="/events/Abu_Dhabi" className="hover:text-white">
+        Abu Dhabi 2026
+      </Link>
+    </li>
+  </ul>
 
-          <div>
-            <h5 className="mb-4 font-serif text-[14.5px] font-bold text-white">
-              Current Editions
-            </h5>
-           
-<ul className="space-y-2.5">
-  <li>
-    <Link href="/events/Las_Vegas" className="hover:text-white">
-      Las Vegas 2026
-    </Link>
-  </li>
-  <li>
-   <Link href="/events/Abu_Dhabi" className="hover:text-white">
-      Abu Dhabi 2026
-    </Link>
-  </li>
-</ul>
-
-          </div>
+  <h5 className="mb-4 mt-6 font-serif text-[14.5px] font-bold text-white">
+    Past Editions
+  </h5>
+  <ul className="space-y-2.5">
+    <li>
+      <Link href="/events/Las_Vegas" className="hover:text-white">
+        Las Vegas 2026 — Historical Edition
+      </Link>
+    </li>
+  </ul>
+</div>
 
           <div>
             <h5 className="mb-4 font-serif text-[14.5px] font-bold text-white">
